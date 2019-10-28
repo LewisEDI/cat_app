@@ -1,28 +1,34 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="html">
+<div>
+  <h1>{{image}}</h1>
+  <div id="picture">
+        <!-- <cat-image :imageUrl="this.cat_url"></cat-image> -->
+      </div>
+</div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'app',
+  data(){
+    return {
+      image: null,
+      cat_url: null
+    }
+  },
   components: {
-    HelloWorld
+
+  },
+  mounted(){
+    fetch('https://api.thecatapi.com/v1/images/search')
+    .then(res => res.json())
+    .then((fetchedData) => {
+      this.image = fetchedData
+      
+    }
+    )
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css" scoped>
 </style>
